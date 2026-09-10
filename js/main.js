@@ -93,6 +93,9 @@
     });
   });
 
+  var initialSwatch = document.querySelector('.swatch[aria-selected="true"]');
+  if (initialSwatch) selectSwatch(initialSwatch);
+
   /* ---------- Scroll reveal ---------- */
   var revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
