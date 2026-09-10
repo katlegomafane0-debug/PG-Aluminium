@@ -187,10 +187,10 @@
       <button class="swatch" role="option" aria-selected="true" data-color="#F1EDE4" data-name="Gloss Duct White" style="--sw:#F1EDE4;">
         <span class="swatch__chip"></span><span class="swatch__label">Gloss Duct White</span>
       </button>
-      <button class="swatch" role="option" aria-selected="false" data-color="#2B2B27" data-name="Matt Charcoal" data-photo="images/finishes/matt-charcoal.jpg" style="--sw:#2B2B27;">
+      <button class="swatch" role="option" aria-selected="false" data-color="#2B2B27" data-name="Matt Charcoal" data-photo-left="images/finishes/matt-charcoal-left.jpg" data-photo-right="images/finishes/matt-charcoal-right.jpg" style="--sw:#2B2B27;">
         <span class="swatch__chip"></span><span class="swatch__label">Matt Charcoal</span>
       </button>
-      <button class="swatch" role="option" aria-selected="false" data-color="#8C8A82" data-name="Gloss Stone Grey" data-photo="images/finishes/gloss-stone-grey.jpg" style="--sw:#8C8A82;">
+      <button class="swatch" role="option" aria-selected="false" data-color="#8C8A82" data-name="Gloss Stone Grey" data-photo-left="images/finishes/gloss-stone-grey-left.jpg" data-photo-right="images/finishes/gloss-stone-grey-right.jpg" style="--sw:#8C8A82;">
         <span class="swatch__chip"></span><span class="swatch__label">Gloss Stone Grey</span>
       </button>
       <button class="swatch" role="option" aria-selected="false" data-color="#A8A6A0" data-name="Matt Silk Grey" style="--sw:#A8A6A0;">
@@ -218,9 +218,12 @@
 
     <div class="finish-preview reveal" id="finish-preview">
       <div class="finish-preview__frame" id="finish-preview-frame">
-        <img class="finish-preview__photo" id="finish-preview-photo" alt="" hidden>
-        <div class="finish-preview__pane"></div>
-        <div class="finish-preview__pane"></div>
+        <div class="finish-preview__pane">
+          <img class="finish-preview__pane-photo" id="finish-preview-photo-left" alt="" hidden>
+        </div>
+        <div class="finish-preview__pane">
+          <img class="finish-preview__pane-photo" id="finish-preview-photo-right" alt="" hidden>
+        </div>
         <div class="finish-preview__mullion finish-preview__mullion--v"></div>
         <div class="finish-preview__mullion finish-preview__mullion--h"></div>
       </div>
