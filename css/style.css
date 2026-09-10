@@ -1,0 +1,540 @@
+/* ==========================================================================
+   PG Aluminium — Design Tokens
+   ========================================================================== */
+:root{
+  /* Finishes — the client's real powder-coat palette */
+  --pg-duct-white:   #F1EDE4;
+  --pg-charcoal:     #2B2B27;
+  --pg-fence-green:  #4B5A3F;
+  --pg-light-bronze: #8B6F47;
+  --pg-stone-grey:   #8C8A82;
+  --pg-silk-grey:    #A8A6A0;
+  --pg-seal-grey:    #55534C;
+  --pg-jet-black:    #1A1A17;
+  --pg-light-grey:   #C9C7C0;
+  --pg-light-straw:  #D8C9A3;
+
+  /* Brand — sampled directly from the PG Aluminium logo */
+  --pg-red:        #ED1F2B;
+  --pg-red-deep:   #B3141C;
+  --pg-black:      #0E0E0E;
+
+  /* Semantic roles */
+  --bg:        var(--pg-duct-white);
+  --text:      var(--pg-charcoal);
+  --accent:    var(--pg-red);
+  --accent-2:  var(--pg-red-deep);
+  --accent-soft: rgba(237,31,43,.12);
+  --border:    var(--pg-stone-grey);
+  --dark-bg:   var(--pg-black);
+  --dark-text: var(--pg-duct-white);
+
+  /* Live accent — the finish-preview swatch only; the finish strip retints
+     the small "now viewing" frame, not the brand chrome around it */
+  --live-accent: var(--pg-duct-white);
+  --live-accent-soft: rgba(241,237,228,.14);
+
+  --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+  --font-caption: "Fraunces", Georgia, serif;
+  --font-body: "Manrope", -apple-system, sans-serif;
+
+  --container: 1360px;
+  --gap: clamp(1rem, 2vw, 2rem);
+
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  *, *::before, *::after{ animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}
+
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+img{ max-width: 100%; display: block; }
+
+.container{
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+.skip-link{
+  position: absolute; left: -999px; top: 0;
+  background: var(--pg-charcoal); color: var(--pg-duct-white);
+  padding: .75rem 1.25rem; z-index: 999;
+}
+.skip-link:focus{ left: 1rem; top: 1rem; }
+
+a{ color: inherit; }
+
+h1, h2, h3{
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin: 0 0 .5em;
+}
+
+.eyebrow{
+  font-family: var(--font-caption);
+  font-style: italic;
+  font-size: .95rem;
+  letter-spacing: .01em;
+  color: var(--pg-seal-grey);
+  margin: 0 0 1rem;
+  max-width: 42ch;
+}
+.eyebrow--on-photo{ color: var(--pg-duct-white); opacity: .92; }
+.eyebrow--on-dark{ color: var(--pg-light-straw); }
+
+.section-title{
+  font-size: clamp(1.9rem, 3.4vw, 3rem);
+  max-width: 20ch;
+}
+.section-title--on-dark{ color: var(--dark-text); }
+
+/* ==========================================================================
+   Scroll reveal
+   ========================================================================== */
+.reveal{
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .8s var(--ease), transform .8s var(--ease);
+}
+.reveal.is-visible{ opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity: 1; transform: none; transition: none; }
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.btn{
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: .95rem;
+  letter-spacing: .01em;
+  padding: .85rem 1.6rem;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), transform .2s var(--ease);
+}
+.btn--primary{
+  background: var(--accent);
+  color: var(--pg-duct-white);
+}
+.btn--primary:hover{ background: var(--accent-2); transform: translateY(-1px); }
+.btn--outline-light{
+  background: transparent;
+  color: var(--pg-duct-white);
+  border-color: rgba(241,237,228,.5);
+}
+.btn--outline-light:hover{ background: rgba(241,237,228,.1); border-color: var(--pg-duct-white); }
+
+/* ==========================================================================
+   Header / Nav
+   ========================================================================== */
+.site-header{
+  position: sticky; top: 0; z-index: 100;
+}
+.site-header::before{
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: rgba(241,237,228,.9);
+  backdrop-filter: saturate(140%) blur(8px);
+  border-bottom: 1px solid rgba(43,43,39,.08);
+}
+.header-inner{
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.5rem;
+  padding-top: .9rem; padding-bottom: .9rem;
+}
+.brand-mark{ display: flex; align-items: center; gap: .4rem; text-decoration: none; color: var(--text); }
+.brand-mark__logo{ height: 42px; width: auto; }
+.brand-mark__pg{
+  font-family: var(--font-display); font-weight: 900; font-size: 1.5rem; letter-spacing: -0.02em;
+}
+.brand-mark__full{
+  font-family: var(--font-caption); font-style: italic; font-size: .95rem; color: var(--pg-seal-grey);
+}
+.main-nav ul{ display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0; }
+.main-nav a{
+  text-decoration: none; font-size: .95rem; font-weight: 500;
+  position: relative; padding-bottom: 2px;
+}
+.main-nav a::after{
+  content: ""; position: absolute; left: 0; right: 100%; bottom: -2px; height: 1px;
+  background: var(--accent); transition: right .3s var(--ease);
+}
+.main-nav a:hover::after{ right: 0; }
+.header-cta{ white-space: nowrap; }
+
+.nav-toggle{
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 40px; height: 40px; background: none; border: none; cursor: pointer;
+}
+.nav-toggle span{ height: 2px; background: var(--text); width: 100%; transition: transform .3s var(--ease), opacity .3s var(--ease); }
+
+/* ==========================================================================
+   Hero + wordmark seam (signature move)
+   ========================================================================== */
+.hero{
+  position: relative;
+  min-height: 88vh;
+  display: flex; align-items: flex-end;
+  overflow: hidden;
+  background: var(--pg-black);
+}
+.hero__media{ position: absolute; inset: 0; }
+.hero__photo{
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+}
+.hero__photo--doors{
+  background-image: url('../images/hero/house-exterior.jpg');
+}
+.hero__scrim{
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(100deg, rgba(14,14,14,.82) 0%, rgba(14,14,14,.5) 36%, rgba(14,14,14,.14) 62%, rgba(14,14,14,0) 78%),
+    linear-gradient(0deg, var(--pg-black) 0%, rgba(14,14,14,0) 42%);
+}
+.hero__content{ position: relative; z-index: 2; padding-bottom: 7rem; }
+.hero__headline{
+  color: var(--pg-duct-white);
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  max-width: 16ch;
+}
+
+.wordmark-seam{
+  position: relative;
+  z-index: 3;
+  display: flex; justify-content: center;
+  margin-top: -0.62em;
+  pointer-events: none;
+}
+.wordmark-seam__text{
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(3.2rem, 13vw, 11rem);
+  line-height: .8;
+  letter-spacing: -0.02em;
+  color: var(--pg-duct-white);
+  mix-blend-mode: difference;
+  white-space: nowrap;
+}
+.wordmark-seam--dark{ margin-top: 0; margin-bottom: -0.62em; }
+
+/* ==========================================================================
+   Credibility strip
+   ========================================================================== */
+.credibility{ padding: 6rem 0 4rem; background: var(--bg); }
+.credibility__grid{
+  display: grid; grid-template-columns: 1fr 1.4fr; gap: var(--gap);
+  align-items: start;
+  border-top: 1px solid var(--border);
+  padding-top: 2.5rem;
+}
+.credibility__statement{
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Why choose — editorial numbered list
+   ========================================================================== */
+.why-choose{ padding: 2rem 0 7rem; }
+.spec-list{
+  list-style: none; margin: 2rem 0 0; padding: 0;
+  border-top: 1px solid var(--border);
+}
+.spec-list__item{
+  display: grid; grid-template-columns: 5rem 1fr; gap: var(--gap);
+  padding: 2.4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.spec-list__number{
+  font-family: var(--font-caption); font-style: italic;
+  font-size: 1.1rem; color: var(--accent);
+}
+.spec-list__body h3{ font-size: clamp(1.3rem, 2vw, 1.8rem); margin-bottom: .35em; }
+.spec-list__body p{ max-width: 62ch; margin: 0; color: var(--pg-seal-grey); }
+
+/* ==========================================================================
+   Product catalog
+   ========================================================================== */
+.catalog{ padding: 3rem 0 7rem; }
+.catalog__tabs{
+  display: flex; gap: .5rem; margin: 2rem 0 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.catalog__tab{
+  background: none; border: none; cursor: pointer;
+  font-family: var(--font-body); font-weight: 600; font-size: 1rem;
+  padding: .9rem 1.4rem; color: var(--pg-seal-grey);
+  position: relative; top: 1px;
+  border-bottom: 2px solid transparent;
+  transition: color .25s var(--ease), border-color .25s var(--ease);
+}
+.catalog__tab:hover{ color: var(--text); }
+.catalog__tab.is-active{ color: var(--text); border-bottom-color: var(--accent); }
+
+.catalog__panel{ display: none; }
+.catalog__panel.is-active{ display: block; }
+
+.catalog__grid{
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap);
+}
+.product-card{
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background: #fff;
+}
+.product-card__photo{
+  aspect-ratio: 4/3;
+  background-size: cover; background-position: center;
+  background-color: var(--pg-light-grey);
+  background-image:
+    linear-gradient(160deg, rgba(43,43,39,.18), rgba(43,43,39,0) 55%),
+    repeating-linear-gradient(90deg, rgba(43,43,39,.10) 0 2px, transparent 2px 15%),
+    repeating-linear-gradient(0deg, rgba(43,43,39,.10) 0 2px, transparent 2px 33%),
+    linear-gradient(200deg, var(--pg-silk-grey), var(--pg-stone-grey));
+}
+.product-card__photo img{
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+.product-card__photo--showerdoors{ background-image: linear-gradient(160deg, rgba(43,43,39,.08), transparent 55%), linear-gradient(200deg, #eef1ec, #a8a6a0); }
+.product-card__photo--aluminiumdoors{ background-image: linear-gradient(160deg, rgba(43,43,39,.2), transparent 55%), repeating-linear-gradient(90deg, rgba(43,43,39,.12) 0 2px, transparent 2px 45%), linear-gradient(200deg, #d8c9a3, #55534c); }
+.product-card__photo--slidingdoors{ background-image: linear-gradient(160deg, rgba(43,43,39,.15), transparent 55%), repeating-linear-gradient(90deg, rgba(43,43,39,.12) 0 2px, transparent 2px 25%), linear-gradient(200deg, #cfd6c8, #8c8a82); }
+.product-card__photo--barndoors{ background-image: linear-gradient(160deg, rgba(43,43,39,.15), transparent 55%), repeating-linear-gradient(0deg, rgba(43,43,39,.10) 0 2px, transparent 2px 12%), linear-gradient(200deg, #a8a6a0, #1a1a17); }
+.product-card__photo--tophung{ background-image: linear-gradient(160deg, rgba(43,43,39,.15), transparent 55%), repeating-linear-gradient(0deg, rgba(43,43,39,.12) 0 2px, transparent 2px 20%), linear-gradient(200deg, #cfd6c8, #4b5a3f); }
+.product-card__photo--casement{ background-image: linear-gradient(160deg, rgba(43,43,39,.15), transparent 55%), repeating-linear-gradient(90deg, rgba(43,43,39,.12) 0 2px, transparent 2px 50%), linear-gradient(200deg, #d8c9a3, #8b6f47); }
+.product-card__photo--sliding{ background-image: linear-gradient(160deg, rgba(43,43,39,.15), transparent 55%), repeating-linear-gradient(90deg, rgba(43,43,39,.12) 0 2px, transparent 2px 33%), linear-gradient(200deg, #c9c7c0, #8c8a82); }
+.product-card__photo--buttjointed{ background-image: linear-gradient(160deg, rgba(43,43,39,.15), transparent 55%), repeating-linear-gradient(0deg, rgba(43,43,39,.10) 0 2px, transparent 2px 12%), linear-gradient(200deg, #a8a6a0, #1a1a17); }
+.product-card__photo--arched{ background-image: radial-gradient(120% 100% at 50% 0%, rgba(43,43,39,.05), rgba(43,43,39,.2) 70%), linear-gradient(200deg, #ded6c2, #55534c); }
+.product-card__photo--tiltturn{ background-image: linear-gradient(160deg, rgba(43,43,39,.15), transparent 55%), repeating-linear-gradient(90deg, rgba(43,43,39,.12) 0 2px, transparent 2px 50%), repeating-linear-gradient(0deg, rgba(43,43,39,.10) 0 2px, transparent 2px 50%), linear-gradient(200deg, #b8c2af, #4b5a3f); }
+
+.product-card h3{ font-size: 1.3rem; margin: 1.2rem 1.2rem .35em; }
+.product-card p{ margin: 0 1.2rem 1.4rem; color: var(--pg-seal-grey); font-size: .95rem; }
+
+/* ==========================================================================
+   Finishes — the differentiator
+   ========================================================================== */
+.finishes{ padding: 6rem 0 7rem; background: var(--pg-black); color: var(--dark-text); }
+.finishes .eyebrow{ color: var(--pg-light-straw); }
+.finishes .section-title{ color: var(--dark-text); }
+.finishes__intro{ max-width: 55ch; color: var(--pg-light-grey); }
+
+.swatch-strip{
+  display: flex; gap: 1rem; overflow-x: auto;
+  padding: 2rem 0 1rem;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+.swatch-strip::-webkit-scrollbar{ height: 6px; }
+.swatch-strip::-webkit-scrollbar-thumb{ background: var(--pg-seal-grey); }
+
+.swatch{
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  width: 128px;
+  background: none; border: none; cursor: pointer;
+  color: var(--dark-text);
+  padding: 0;
+  transition: transform .3s var(--ease);
+}
+.swatch:hover, .swatch:focus-visible{ transform: translateY(-4px); }
+.swatch__chip{
+  display: block; width: 100%; aspect-ratio: 1;
+  background: var(--sw);
+  border-radius: 3px;
+  border: 1px solid rgba(241,237,228,.15);
+  position: relative;
+  box-shadow: 0 8px 20px -8px rgba(0,0,0,.6);
+}
+.swatch[aria-selected="true"] .swatch__chip::after{
+  content: "✓";
+  position: absolute; top: 8px; right: 8px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--pg-duct-white); color: var(--pg-charcoal);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .75rem; font-weight: 700;
+}
+.swatch__label{
+  display: block; margin-top: .6rem; font-size: .82rem; font-weight: 500;
+  text-align: left; line-height: 1.25;
+}
+
+.finish-preview{
+  margin-top: 3rem;
+  display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+}
+.finish-preview__frame{
+  position: relative;
+  width: min(420px, 100%);
+  aspect-ratio: 16/10;
+  background: var(--live-accent);
+  border: 10px solid var(--live-accent);
+  transition: background-color .4s var(--ease), border-color .4s var(--ease);
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+.finish-preview__pane{ background: linear-gradient(160deg, rgba(241,237,228,.65), rgba(241,237,228,.25)); }
+.finish-preview__mullion{ position: absolute; background: var(--live-accent); transition: background-color .4s var(--ease); }
+.finish-preview__mullion--v{ left: 50%; top: 0; bottom: 0; width: 10px; transform: translateX(-50%); }
+.finish-preview__mullion--h{ top: 50%; left: 0; right: 0; height: 10px; transform: translateY(-50%); }
+.finish-preview__caption{ font-family: var(--font-caption); font-style: italic; color: var(--pg-light-grey); }
+.finish-preview__caption strong{ color: var(--dark-text); font-style: normal; }
+
+.woodlook{ margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid rgba(241,237,228,.15); }
+.woodlook .eyebrow{ margin-bottom: 0; }
+
+/* ==========================================================================
+   Process stepper
+   ========================================================================== */
+.process{ padding: 7rem 0; }
+.stepper{
+  list-style: none; margin: 3rem 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--gap);
+}
+.stepper__step{ border-top: 2px solid var(--accent); padding-top: 1.2rem; }
+.stepper__number{ font-family: var(--font-caption); font-style: italic; color: var(--accent); font-size: 1rem; }
+.stepper__step h3{ font-size: 1.15rem; margin: .4em 0 .3em; }
+.stepper__step p{ margin: 0; color: var(--pg-seal-grey); font-size: .92rem; }
+
+/* ==========================================================================
+   Franchise network
+   ========================================================================== */
+.franchise{ position: relative; background: var(--pg-black); color: var(--dark-text); padding-bottom: 6rem; }
+.franchise__lede{ max-width: 55ch; color: var(--pg-light-grey); font-size: 1.1rem; }
+.region-grid{
+  list-style: none; margin: 2.5rem 0 3rem; padding: 0;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem 2rem;
+  border-top: 1px solid rgba(241,237,228,.18);
+  padding-top: 1.5rem;
+}
+.region-grid li{
+  padding: .9rem 0; border-bottom: 1px solid rgba(241,237,228,.12);
+  font-family: var(--font-display); font-weight: 600; font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   Contact
+   ========================================================================== */
+.contact{ padding: 7rem 0; }
+.contact__grid{ display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; }
+.contact__intro p{ color: var(--pg-seal-grey); max-width: 42ch; }
+.contact__office{ margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.contact__person{ font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; margin: 0 0 .2em; }
+.contact__office a{ text-decoration: none; color: var(--accent); font-weight: 600; }
+
+.quote-form{ display: grid; gap: 1.3rem; }
+.form-row{ display: flex; flex-direction: column; gap: .4rem; }
+.form-row label{ font-size: .88rem; font-weight: 600; }
+.form-row input, .form-row select, .form-row textarea{
+  font-family: var(--font-body); font-size: 1rem;
+  padding: .8rem .9rem;
+  border: 1px solid var(--border);
+  background: #fff; color: var(--text);
+  border-radius: 2px;
+  transition: border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.form-row input:focus, .form-row select:focus, .form-row textarea:focus{
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.form-error{ display: none; color: #a4453a; font-size: .82rem; }
+.form-row.has-error input, .form-row.has-error select{ border-color: #a4453a; }
+.form-row.has-error .form-error{ display: block; }
+.quote-form .btn{ justify-self: start; }
+.form-success{
+  padding: .9rem 1rem; background: var(--accent-soft); border: 1px solid var(--accent);
+  font-size: .92rem;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer{ background: var(--pg-black); color: var(--pg-light-grey); padding: 5rem 0 2.5rem; }
+.footer__top{ display: grid; grid-template-columns: 1.3fr 2fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(241,237,228,.15); }
+.footer__brand p{ max-width: 38ch; margin-top: 1rem; font-size: .92rem; }
+.footer__brand .brand-mark__pg{ color: var(--pg-red); }
+.footer__brand .brand-mark__full{ color: var(--pg-light-grey); }
+.footer__nav{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.footer__nav .eyebrow{ color: var(--pg-light-straw); }
+.footer__nav ul{ list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.footer__nav a{ text-decoration: none; font-size: .92rem; }
+.footer__nav a:hover{ color: var(--dark-text); }
+
+.footer__certs{ padding: 2.5rem 0; border-bottom: 1px solid rgba(241,237,228,.15); }
+.cert-badges{
+  list-style: none; margin: 1rem 0 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: .75rem;
+}
+.cert-badges li{
+  border: 1px solid rgba(241,237,228,.3);
+  padding: .5rem 1rem; font-size: .8rem; letter-spacing: .04em;
+  font-weight: 600;
+}
+.footer__bottom{ padding-top: 1.5rem; font-size: .82rem; }
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 1024px){
+  .catalog__grid{ grid-template-columns: repeat(2, 1fr); }
+  .stepper{ grid-template-columns: repeat(3, 1fr); row-gap: 2rem; }
+  .region-grid{ grid-template-columns: repeat(2, 1fr); }
+  .footer__nav{ grid-template-columns: repeat(2, 1fr); row-gap: 2rem; }
+}
+
+@media (max-width: 900px){
+  .main-nav{
+    position: fixed; inset: 64px 0 0 0; background: var(--bg);
+    transform: translateX(100%); transition: transform .35s var(--ease);
+    padding: 2rem clamp(1.25rem, 4vw, 3rem);
+  }
+  .main-nav.is-open{ transform: translateX(0); }
+  .main-nav ul{ flex-direction: column; gap: 1.5rem; }
+  .main-nav a{ font-size: 1.4rem; }
+  .header-cta{ display: none; }
+  .nav-toggle{ display: flex; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){ opacity: 0; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+
+  .credibility__grid{ grid-template-columns: 1fr; }
+  .contact__grid{ grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px){
+  .spec-list__item{ grid-template-columns: 3rem 1fr; }
+  .catalog__grid{ grid-template-columns: 1fr; }
+  .stepper{ grid-template-columns: 1fr; }
+  .stepper__step{ padding-top: .8rem; }
+  .region-grid{ grid-template-columns: 1fr; }
+  .footer__top{ grid-template-columns: 1fr; }
+  .footer__nav{ grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px){
+  .hero{ min-height: 92vh; }
+  .wordmark-seam__text{ font-size: clamp(2.4rem, 15vw, 6rem); }
+}
