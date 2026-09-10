@@ -45,6 +45,9 @@
   var root = document.documentElement;
   var allSwatches = document.querySelectorAll(".swatch");
   var previewName = document.getElementById("finish-preview-name");
+  var previewTag = document.getElementById("finish-preview-tag");
+  var previewFrame = document.getElementById("finish-preview-frame");
+  var previewPhoto = document.getElementById("finish-preview-photo");
 
   function selectSwatch(swatch) {
     allSwatches.forEach(function (s) {
@@ -52,9 +55,22 @@
     });
     var color = swatch.getAttribute("data-color");
     var name = swatch.getAttribute("data-name");
+    var photo = swatch.getAttribute("data-photo");
     root.style.setProperty("--live-accent", color);
     root.style.setProperty("--live-accent-soft", hexToRgba(color, 0.14));
     if (previewName) previewName.textContent = name;
+
+    if (photo && previewPhoto) {
+      previewPhoto.src = photo;
+      previewPhoto.alt = name + " finish, real installation photo";
+      previewPhoto.hidden = false;
+      if (previewFrame) previewFrame.classList.add("has-photo");
+      if (previewTag) previewTag.hidden = false;
+    } else {
+      if (previewPhoto) previewPhoto.hidden = true;
+      if (previewFrame) previewFrame.classList.remove("has-photo");
+      if (previewTag) previewTag.hidden = true;
+    }
   }
 
   function hexToRgba(hex, alpha) {
